@@ -13,12 +13,23 @@
 <body>
     <h1>Bird Observations Site</h1>
     <div id="app">
+        <h2>Species filter</h2>
+        <!-- filtering -->
+        <input v-model="species" @keyup.enter="getBySpecies(species)" placeholder="Species" type="text">
+        <button @click="getBySpecies(species)" class="btn btn-primary">Filter</button>
+
         <h2>Get all</h2>
         <button id="getAllButton" v-on:click="getAllBirds" class="btn btn-primary">Get All Birds</button>
         <br />
-
+       
         <table v-if="getAllBirds.length > 0" class="table table-striped"></table>
-             
+        <thead>
+            <th>
+                <button v-on:click="sortById()">Id</button>
+                <button v-on:click="sortByIdDescending()">desc</button>
+                <button v-on:click="sortBySpecies()">Name</button>
+            </th> 
+        </thead> 
         <table class="table" v-if="birds.length">
             <thead>
                 <tr>
@@ -36,6 +47,19 @@
             </tbody>
         </table>
         <div v-else>No birds</div>
+       
+        
+        <h2>Add (POST)</h2>
+        <input v-model="addData.species" placeholder="name" type="text" />
+        <input v-model.number="addData.howMany" placeholder="age" type="number" />
+        <button v-on:click="addBird()" class="btn btn-success">Add</button>
+        {{addMessage}}
+
+        <h2>Delete (DELETE)</h2>
+        <input v-model.number="deleteId" placeholder="id" type="number" />
+        <button v-on:click="deleteBird(deleteId)" class="btn btn-warning">Delete</button>
+        {{deleteMessage}}
+
     </div>
 
     <script src="BirdObservations.js"></script>
