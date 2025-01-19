@@ -22,8 +22,9 @@
         <button id="getAllButton" v-on:click="getAllBirds" class="btn btn-primary">Get All Birds</button>
         <br />
        
-        <table v-if="getAllBirds.length > 0" class="table table-striped"></table>
+        
         <thead>
+            <table v-if="getAllBirds.length > 0" class="table table-striped"></table>
             <th>
                 <button v-on:click="sortById()">Id</button>
                 <button v-on:click="sortByIdDescending()">desc</button>
@@ -50,15 +51,20 @@
        
         
         <h2>Add (POST)</h2>
-        <input v-model="addData.species" placeholder="name" type="text" />
-        <input v-model.number="addData.howMany" placeholder="age" type="number" />
-        <button v-on:click="addBird()" class="btn btn-success">Add</button>
-        {{addMessage}}
+        <input v-model="addData.species" placeholder="name" type="text" id="inputName"/>
+        <input v-model.number="addData.howMany" placeholder="howMany" type="number" id="inputHowMany"/>
+        <button v-on:click="addBird()" class="btn btn-success" id="createButton">Add</button>
+        <div v-if="addMessage">
+            <div id="addMessage">{{addMessage}}</div>
+        </div>
 
         <h2>Delete (DELETE)</h2>
-        <input v-model.number="deleteId" placeholder="id" type="number" />
+        <input v-model.number="deleteId" placeholder="id" type="number" id="deleteId" />
         <button v-on:click="deleteBird(deleteId)" class="btn btn-warning">Delete</button>
-        {{deleteMessage}}
+        <div v-if="deleteMessage">
+            <div id="deleteMessage">{{deleteMessage}}</div>
+        </div>
+        
 
     </div>
 
